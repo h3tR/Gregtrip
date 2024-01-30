@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "gregtrip.refmap.json",
+  "mixins": [],
+  "client": [
+    "MixinLevelRenderer",
+    "MixinLocalPlayer"
+  ],
+  "minVersion": "0.8"
+}
