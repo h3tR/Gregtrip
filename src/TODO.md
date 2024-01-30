@@ -1,0 +1,5 @@
+ - [ ] fractal hallucinations
+ - [ ] saturation hallucination
+ - [ ] Aspergillus clavatus synthesis
+ - [ ] Morning glory synthesis
+ - [ ] Fix Oculus incompatibility
