@@ -1,0 +1,21 @@
+{
+  "mappings": {
+    "ml/jozefpeeterslaan72wuustwezel/gregtrip/mixin/MixinLocalPlayer": {
+      "tick": "Lnet/minecraft/client/player/LocalPlayer;m_8119_()V"
+    },
+    "ml/jozefpeeterslaan72wuustwezel/gregtrip/mixin/MixinLevelRenderer": {
+      "renderChunkLayer": "Lnet/minecraft/client/renderer/LevelRenderer;m_172993_(Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack;DDDLorg/joml/Matrix4f;)V"
+    }
+  },
+  "data": {
+    "searge": {
+      "ml/jozefpeeterslaan72wuustwezel/gregtrip/mixin/MixinLocalPlayer": {
+        "tick": "Lnet/minecraft/client/player/LocalPlayer;m_8119_()V"
+      },
+      "ml/jozefpeeterslaan72wuustwezel/gregtrip/mixin/MixinLevelRenderer": {
+        "renderChunkLayer": "Lnet/minecraft/client/renderer/LevelRenderer;m_172993_(Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack;DDDLorg/joml/Matrix4f;)V"
+      }
+
+    }
+  }
+}

@@ -2,4 +2,6 @@
  - [ ] saturation hallucination
  - [ ] Aspergillus clavatus synthesis
  - [ ] Morning glory synthesis
- - [ ] Fix Oculus incompatibility
+ - [ ] Fix Oculus/Embeddium incompatibility
+ - [ ] Fix some blocks not affected by shader
+ - [ ] Entity shader effects?

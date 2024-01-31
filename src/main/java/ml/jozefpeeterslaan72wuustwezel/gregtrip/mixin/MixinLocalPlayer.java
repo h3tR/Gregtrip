@@ -1,7 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin;
 
 import com.mojang.authlib.GameProfile;
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixinaccessors.Trippable;
+import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixininterfaces.Trippable;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
@@ -14,11 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends AbstractClientPlayer implements Trippable {
 
-    private static final int TRIP_LIMIT = 12000;
     @Unique
-    public int tripTimer = 0;
+    private static final int TRIP_LIMIT = 12000; //setTripLimit??
     @Unique
-    public boolean activeTrip = false;
+    public int gTrip$tripTimer = 0;
+    @Unique
+    public boolean gTrip$activeTrip = false;
 
     public MixinLocalPlayer(ClientLevel clientLevel, GameProfile gameProfile) {
         super(clientLevel, gameProfile);
@@ -27,25 +28,25 @@ public abstract class MixinLocalPlayer extends AbstractClientPlayer implements T
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tripTick(CallbackInfo ci){
-        if(activeTrip && ++tripTimer >= TRIP_LIMIT){
-            activeTrip = false;
-            tripTimer = 0;
+        if(gTrip$activeTrip && ++gTrip$tripTimer >= TRIP_LIMIT){
+            gTrip$activeTrip = false;
+            gTrip$tripTimer = 0;
         }
     }
 
     @Override
-    public boolean getIsTripActive() {
-        return activeTrip;
+    public boolean gTrip$getIsTripActive() {
+        return gTrip$activeTrip;
     }
 
     @Override
-    public void setIsTripActive(boolean isTripActive) {
-        activeTrip = isTripActive;
+    public void gTrip$setIsTripActive(boolean isTripActive) {
+        gTrip$activeTrip = isTripActive;
     }
 
 
     @Override
-    public int getTripTimer() {
-        return tripTimer;
+    public int gTrip$getTripTimer() {
+        return gTrip$tripTimer;
     }
 }
