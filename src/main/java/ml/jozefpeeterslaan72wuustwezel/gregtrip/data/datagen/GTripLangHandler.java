@@ -44,7 +44,11 @@ public class GTripLangHandler extends LangHandler {
             TrifluoroacetylFluoride,
             Diethylamine,
             LysergicAcidDiethylamideResidue,
-            LysergicAcidDiethylamideSolution
+            LysergicAcidDiethylamideSolution,
+            AlkaloidResidue,
+            MorningGlorySeedSlurry,
+            LysergicAcidAmideMixture,
+            AmmoniumHydroxide
 
     );
 

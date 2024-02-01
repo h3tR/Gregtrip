@@ -255,8 +255,14 @@ public class GTripRecipes {
                 .outputFluids(ErgotAlkaloidAmideSolution.getFluid(FluidHelper.getBucket()))
                 .duration(180).EUt(VA[LV]).save(provider);
 
-        CHEMICAL_RECIPES.recipeBuilder("d_lysergic_acid_solution")
+        CHEMICAL_RECIPES.recipeBuilder("d_lysergic_acid_solution_from_ergot")
                 .inputFluids(ErgotAlkaloidAmideSolution.getFluid(FluidHelper.getBucket()))
+                .inputFluids(TartaricAcid.getFluid(FluidHelper.getBucket()))
+                .outputFluids(DLysergicAcidSolution.getFluid(FluidHelper.getBucket()))
+                .duration(180).EUt(VA[LV]).save(provider);
+
+        CHEMICAL_RECIPES.recipeBuilder("d_lysergic_acid_solution_from_lysergamides")
+                .inputItems(dust,LysergicAcidAmideMixture,3)
                 .inputFluids(TartaricAcid.getFluid(FluidHelper.getBucket()))
                 .outputFluids(DLysergicAcidSolution.getFluid(FluidHelper.getBucket()))
                 .duration(180).EUt(VA[LV]).save(provider);
@@ -328,7 +334,7 @@ public class GTripRecipes {
 
         CHEMICAL_RECIPES.recipeBuilder("lysergic_acid_diethylamide")
                 .inputFluids(LysergicAcidDiethylamideResidue.getFluid(FluidHelper.getBucket()))
-                .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),20,5)
+                .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),2000,500)
                 .inputFluids(Ice.getFluid((long) (FluidHelper.getBucket()*0.16f)))
                 .outputItems(dust,LysergicAcidDiethylamide)
                 .duration(180).EUt(VA[LV]).save(provider);
@@ -357,6 +363,33 @@ public class GTripRecipes {
                 .inputFluids(LysergicAcidDiethylamideSolution.getFluid(FluidHelper.getBucket()/20))
                 .inputItems(gem, Sugar)
                 .outputItems(INFUSED_SUGAR_CUBE.asStack())
+                .duration(60).EUt(VA[LV]).save(provider);
+
+        CHEMICAL_RECIPES.recipeBuilder("ammonium_hydroxide")
+                .inputFluids(Ammonia.getFluid(FluidHelper.getBucket()))
+                .inputFluids(Water.getFluid(FluidHelper.getBucket()))
+                .outputFluids(AmmoniumHydroxide.getFluid(FluidHelper.getBucket()))
+                .duration(60).EUt(VA[LV]).save(provider);
+
+        CHEMICAL_RECIPES.recipeBuilder("morning_glory_seed_slurry")
+                .inputFluids(Naphtha.getFluid(FluidHelper.getBucket()))
+                .inputItems(MORNING_GLORY_SEEDS.asStack(4))
+                .outputFluids(MorningGlorySeedSlurry.getFluid(FluidHelper.getBucket()))
+                .outputFluids(SeedOil.getFluid(FluidHelper.getBucket()*2))
+                .duration(60).EUt(VA[LV]).save(provider);
+
+        CHEMICAL_RECIPES.recipeBuilder("alkaloid_slurry")
+                .inputFluids(MorningGlorySeedSlurry.getFluid(FluidHelper.getBucket()))
+                .inputFluids(AmmoniumHydroxide.getFluid(FluidHelper.getBucket()/2))
+                .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),4000,500)
+                .outputItems(dust, AlkaloidResidue)
+                .duration(60).EUt(VA[LV]).save(provider);
+
+        CHEMICAL_RECIPES.recipeBuilder("lysergic_acid_amide_mixture")
+                .inputItems(dust, AlkaloidResidue)
+                .inputFluids(TartaricAcid.getFluid(FluidHelper.getBucket()/2))
+                .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),2500,500)
+                .outputItems(dust, LysergicAcidAmideMixture)
                 .duration(60).EUt(VA[LV]).save(provider);
     }
 }

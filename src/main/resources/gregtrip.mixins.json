@@ -3,7 +3,9 @@
   "package": "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "gregtrip.refmap.json",
-  "mixins": [],
+  "plugin": "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.GTripMixinPlugin",
+  "mixins": [
+  ],
   "client": [
     "MixinLevelRenderer",
     "MixinLocalPlayer"

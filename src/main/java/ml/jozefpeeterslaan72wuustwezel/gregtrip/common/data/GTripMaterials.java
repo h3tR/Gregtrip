@@ -233,4 +233,29 @@ public class GTripMaterials {
             .iconSet(MaterialIconSet.BRIGHT)
             .buildAndRegister();
 
+    public static final Material MorningGlorySeedSlurry = new Material.Builder(GregtripMod.id("morning_glory_seed_slurry"))
+            .fluid()
+            .color(0x2A5DD6)
+            .iconSet(MaterialIconSet.BRIGHT)
+            .buildAndRegister();
+
+
+    public static final Material AmmoniumHydroxide = new Material.Builder(GregtripMod.id("ammonium_hydroxide"))
+            .fluid()
+            .color(0x88F996)
+            .iconSet(MaterialIconSet.BRIGHT)
+            .buildAndRegister();
+
+    public static final Material AlkaloidResidue = new Material.Builder(GregtripMod.id("alkaloid_residue"))
+            .dust()
+            .color(0x45A3CF)
+            .iconSet(MaterialIconSet.BRIGHT)
+            .buildAndRegister();
+
+    public static final Material LysergicAcidAmideMixture = new Material.Builder(GregtripMod.id("lysergic_acid_amide_mixture"))
+            .dust()
+            .color(0x25CFF8)
+            .iconSet(MaterialIconSet.BRIGHT)
+            .buildAndRegister();
+
 }
