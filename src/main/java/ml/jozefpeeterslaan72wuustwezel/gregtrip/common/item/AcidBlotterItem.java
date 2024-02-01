@@ -18,8 +18,6 @@ public class AcidBlotterItem extends Item {
            Trippable trippable = (Trippable)Minecraft.getInstance().player;
            if(!trippable.gTrip$getIsTripActive()) {
                trippable.gTrip$setIsTripActive(true);
-               stack.shrink(1);
-
            }
         }
     }

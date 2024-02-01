@@ -37,15 +37,16 @@ public abstract class MixinLevelRenderer implements AutoCloseable, ResourceManag
         gTrip$LSDShaderMap.put(RenderType.translucent(),GregtripMod.ClientModEvents::getRenderTypeLSDTranslucent);
     }
 
-    //I don't really know why this is giving an error in IntelliJ but it works just fine in game
+    //I don't really know why this is giving an error in IntelliJ, but it works just fine in game.
     @Inject(method = "renderChunkLayer", at = @At(value = "INVOKE", desc = @Desc(owner = RenderSystem.class, value = "getShader", ret = ShaderInstance.class)))
     private void renderChunkLayer(RenderType pRenderType, PoseStack pPoseStack, double pCamX, double pCamY, double pCamZ, Matrix4f pProjectionMatrix, CallbackInfo ci) {
         if(((Trippable)Minecraft.getInstance().player).gTrip$getIsTripActive() && gTrip$LSDShaderMap.containsKey(pRenderType)) {
             RenderSystem.setShader(gTrip$LSDShaderMap.get(pRenderType));
             ShaderInstance shader = RenderSystem.getShader();
-            shader.safeGetUniform("Time").set(ticks);
-            shader.safeGetUniform("WaveStrength").set(50f);
-            shader.safeGetUniform("PlayerSpeed").set(Minecraft.getInstance().player.getDeltaMovement().toVector3f().length());
+            shader.safeGetUniform("Time").set((float)ticks);
+            //shader.safeGetUniform("WaveStrength").set(2f);
+            float playerSpeed = Math.max(Minecraft.getInstance().player.getDeltaMovement().toVector3f().length(),.6f);
+            shader.safeGetUniform("PlayerSpeedModifier").set((1-.191f/(playerSpeed+.001f)));
         }
     }
 }

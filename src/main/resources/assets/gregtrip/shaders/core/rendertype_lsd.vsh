@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 #moj_import <light.glsl>
 #moj_import <fog.glsl>
@@ -16,9 +16,9 @@ uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform vec3 ChunkOffset;
 uniform int FogShape;
-uniform int Time;
+uniform float Time;
 uniform float WaveStrength;
-uniform float PlayerSpeed;
+uniform float PlayerSpeedModifier;
 
 
 out float vertexDistance;
@@ -31,16 +31,22 @@ void main() {
     vec3 pos = Position + ChunkOffset;
 
     vertexDistance = fog_distance(ModelViewMat, pos, FogShape);
-    if(PlayerSpeed<.1f){
-        float waveModifier =  1024/WaveStrength*pow(vertexDistance, 1/20f);
-        pos.x += sin(pos.z*pos.x*pos.y*.5+Time/8F)/waveModifier;
-        pos.y += cos(pos.z*-pos.x*pos.y*.5+Time/8F)/waveModifier;
-        pos.z -= cos(-pos.z*-pos.x*pos.y*.5+Time/8F)/waveModifier;
-    }
 
-    gl_Position = ProjMat * ModelViewMat * vec4(pos, 1.0);
-   /* vec4 vibrantColor = RGBAtoHSVA(Color);
-    vibrantColor.y=.8f;*/
+    float distanceModifier =  max(4,pow(vertexDistance, 1/2f))/PlayerSpeedModifier;
+
+    vec3 posOffset = vec3(0);
+
+    posOffset.x = sin(pos.z*pos.x*pos.y*.5+Time/distanceModifier);
+    posOffset.y = cos(pos.z*-pos.x*pos.y*.5+Time/distanceModifier);
+    posOffset.z = -cos(-pos.z*-pos.x*pos.y*.5+Time/distanceModifier);
+
+    posOffset /= 64/WaveStrength;
+    posOffset *= pow(vertexDistance, .25f);
+    posOffset *= PlayerSpeedModifier;
+
+    gl_Position = ProjMat * ModelViewMat * vec4(pos+posOffset, 1.0);
+    /* vec4 vibrantColor = RGBAtoHSVA(Color);
+     vibrantColor.y=.8f;*/
 
     vertexColor = Color * minecraft_sample_lightmap(Sampler2, UV2);
 
