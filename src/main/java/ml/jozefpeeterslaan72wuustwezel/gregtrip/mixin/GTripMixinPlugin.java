@@ -21,7 +21,6 @@ public class GTripMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        System.out.println(mixinClassName);
         switch (mixinClassName){
           /*  case "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.sodium.MixinTerrainRenderPass" -> {
                return MixinPluginShared.isClassFound("me.jellysquid.mods.sodium.client.render.chunk.terrain.TerrainRenderPass");

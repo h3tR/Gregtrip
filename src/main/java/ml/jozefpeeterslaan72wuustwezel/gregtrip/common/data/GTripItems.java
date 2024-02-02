@@ -1,39 +1,22 @@
 package ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data;
 
 import com.gregtechceu.gtceu.api.item.ComponentItem;
-import com.gregtechceu.gtceu.api.registry.GTRegistries;
-import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
-import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.GregtripGTAddon;
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.GregtripMod;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.item.AcidConsumableItem;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTab;
 
 import static ml.jozefpeeterslaan72wuustwezel.gregtrip.GregtripGTAddon.REGISTRATE;
 
 public class GTripItems {
 
-   /* public static RegistryEntry<CreativeModeTab> GREGTRIP_CREATIVE_MODE_TAB = GTRegistries.REGISTRATE.defaultCreativeTab("gregtrip",
-                    builder -> builder.displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator("item", GregtripGTAddon.REGISTRATE))
-                            .icon(GTripItems.ACID_BLOTTER::asStack)
-                            .build())
-            .register();
-
-    static {
-        REGISTRATE.creativeModeTab(()->GREGTRIP_CREATIVE_MODE_TAB);
-    }*/
     public static final ItemEntry<ComponentItem> IMMATURE_ERGOT_CULTURE = REGISTRATE.item("immature_ergot_culture", ComponentItem::create)
             .lang("Immature Ergot Culture")
             .properties(p -> p.stacksTo(16))
             .defaultModel()
             .register();
-
 
     public static final ItemEntry<ComponentItem> MATURE_ERGOT_CULTURE = REGISTRATE.item("mature_ergot_culture", ComponentItem::create)
             .lang("Mature Ergot Culture")
@@ -76,10 +59,11 @@ public class GTripItems {
             .model(NonNullBiConsumer.noop())
             .register();
 
-    public static final ItemEntry<ComponentItem> MORNING_GLORY_SEEDS = REGISTRATE.item("morning_glory_seeds", ComponentItem::create)
+   /* public static final ItemEntry<ComponentItem> MORNING_GLORY_SEEDS = REGISTRATE.item("morning_glory_seeds", ComponentItem::create)
             .lang("Morning Glory Seeds")
             .defaultModel()
-            .register();
+            .register();*/
+
 
 
 

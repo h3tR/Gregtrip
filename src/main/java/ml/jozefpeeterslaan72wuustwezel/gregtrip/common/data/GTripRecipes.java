@@ -13,6 +13,7 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripMaterials.*;
 import static ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripItems.*;
+import static ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripBlocks.*;
 import static com.gregtechceu.gtceu.api.GTValues.*;
 public class GTripRecipes {
     public static void init(Consumer<FinishedRecipe> provider)
@@ -265,7 +266,7 @@ public class GTripRecipes {
                 .inputItems(dust,LysergicAcidAmideMixture,3)
                 .inputFluids(TartaricAcid.getFluid(FluidHelper.getBucket()))
                 .outputFluids(DLysergicAcidSolution.getFluid(FluidHelper.getBucket()))
-                .duration(180).EUt(VA[LV]).save(provider);
+                .duration(180).EUt(VA[HV]).save(provider);
 
         DISTILLERY_RECIPES.recipeBuilder("d_lysergic_acid")
                 .inputFluids(DLysergicAcidSolution.getFluid(FluidHelper.getBucket()))
@@ -373,23 +374,23 @@ public class GTripRecipes {
 
         CHEMICAL_RECIPES.recipeBuilder("morning_glory_seed_slurry")
                 .inputFluids(Naphtha.getFluid(FluidHelper.getBucket()))
-                .inputItems(MORNING_GLORY_SEEDS.asStack(4))
+                .inputItems(MORNING_GLORY_CROP.asStack(4))
                 .outputFluids(MorningGlorySeedSlurry.getFluid(FluidHelper.getBucket()))
                 .outputFluids(SeedOil.getFluid(FluidHelper.getBucket()*2))
-                .duration(60).EUt(VA[LV]).save(provider);
+                .duration(900).EUt(VA[HV]).save(provider);
 
         CHEMICAL_RECIPES.recipeBuilder("alkaloid_slurry")
                 .inputFluids(MorningGlorySeedSlurry.getFluid(FluidHelper.getBucket()))
                 .inputFluids(AmmoniumHydroxide.getFluid(FluidHelper.getBucket()/2))
                 .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),4000,500)
                 .outputItems(dust, AlkaloidResidue)
-                .duration(60).EUt(VA[LV]).save(provider);
+                .duration(580).EUt(VA[EV]).save(provider);
 
         CHEMICAL_RECIPES.recipeBuilder("lysergic_acid_amide_mixture")
                 .inputItems(dust, AlkaloidResidue)
                 .inputFluids(TartaricAcid.getFluid(FluidHelper.getBucket()/2))
                 .chancedInput(Chloroform.getFluid((long) (FluidHelper.getBucket()*1.2)),2500,500)
                 .outputItems(dust, LysergicAcidAmideMixture)
-                .duration(60).EUt(VA[LV]).save(provider);
+                .duration(180).EUt(VA[EV]).save(provider);
     }
 }

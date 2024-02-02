@@ -167,7 +167,7 @@ loom {
                 mod_author             : mod_author, mod_description: mod_description
         ]
         inputs.properties replaceProperties
-
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         filesMatching("META-INF/mods.toml") {
             expand replaceProperties
         }

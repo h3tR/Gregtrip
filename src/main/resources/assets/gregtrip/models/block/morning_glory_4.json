@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "gregtrip:block/morning_glory_4"
+  }
+}

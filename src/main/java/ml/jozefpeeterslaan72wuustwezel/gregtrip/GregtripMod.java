@@ -3,6 +3,7 @@ package ml.jozefpeeterslaan72wuustwezel.gregtrip;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.tterrag.registrate.providers.ProviderType;
+import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripBlocks;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripItems;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.data.datagen.GTripLangHandler;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixininterfaces.Trippable;
@@ -40,8 +41,7 @@ public class GregtripMod
 
 
         GTripItems.init();
-
-
+        GTripBlocks.init();
 
         GregtripGTAddon.REGISTRATE.addDataGenerator(ProviderType.LANG, GTripLangHandler::init);
         GregtripGTAddon.REGISTRATE.registerRegistrate();
