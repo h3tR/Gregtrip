@@ -14,10 +14,6 @@ public class GregtripGTAddon implements IGTAddon {
 
     public static final GTRegistrate REGISTRATE = GTRegistrate.create(GregtripMod.MODID);
 
-    /*@Override
-    public GTRegistrate getRegistrate() {
-        return REGISTRATE;
-    }*/
 
     @Override
     public void registerMaterials() {

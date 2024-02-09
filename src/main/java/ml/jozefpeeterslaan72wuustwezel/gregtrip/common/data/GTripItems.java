@@ -9,9 +9,13 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.food.FoodProperties;
 
 import static ml.jozefpeeterslaan72wuustwezel.gregtrip.GregtripGTAddon.REGISTRATE;
+//import static ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripCreativeModeTab.GTRIP;
 
 public class GTripItems {
 
+    /*static {
+        REGISTRATE.creativeModeTab(()->GTRIP);
+    }*/
     public static final ItemEntry<ComponentItem> IMMATURE_ERGOT_CULTURE = REGISTRATE.item("immature_ergot_culture", ComponentItem::create)
             .lang("Immature Ergot Culture")
             .properties(p -> p.stacksTo(16))

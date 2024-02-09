@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.gregtrip.common.item;
 
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixininterfaces.Trippable;
+import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixinhelpers.Trippable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;

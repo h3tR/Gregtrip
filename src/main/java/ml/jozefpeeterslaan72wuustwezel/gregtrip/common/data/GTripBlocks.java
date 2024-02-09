@@ -13,8 +13,12 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.Tags;
 
 import static ml.jozefpeeterslaan72wuustwezel.gregtrip.GregtripGTAddon.REGISTRATE;
+//import static ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripCreativeModeTab.GTRIP;
 
 public class GTripBlocks {
+   /* static {
+        REGISTRATE.creativeModeTab(()->GTRIP);
+    }*/
 
     public static final BlockEntry<CropBlock> MORNING_GLORY_CROP = REGISTRATE.block("morning_glory", properties -> (CropBlock)new CropBlock(properties.randomTicks().noCollission().mapColor(MapColor.PLANT).sound(SoundType.CROP).instabreak().pushReaction(PushReaction.DESTROY)){
                 @Override

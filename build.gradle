@@ -141,7 +141,7 @@ loom {
         modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-forge:${rei_version}")
         modImplementation("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 
-        //modImplementation("org.embeddedt:embeddium-1.20.1:0.2.11-git.23aedfb+mc1.20.1")
+        modImplementation("org.embeddedt:embeddium-1.20.1:0.2.11-git.23aedfb+mc1.20.1")
 
 
         modRuntimeOnly("dev.toma.configuration:configuration-forge-1.20.1:2.2.0")

@@ -1,31 +1,27 @@
 package ml.jozefpeeterslaan72wuustwezel.gregtrip;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.tterrag.registrate.providers.ProviderType;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripBlocks;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripItems;
+import ml.jozefpeeterslaan72wuustwezel.gregtrip.common.data.GTripLootModifiers;
 import ml.jozefpeeterslaan72wuustwezel.gregtrip.data.datagen.GTripLangHandler;
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixininterfaces.Trippable;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterShadersEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.function.Consumer;
 
 @Mod(GregtripMod.MODID)
 public class GregtripMod
@@ -37,11 +33,15 @@ public class GregtripMod
 
     public GregtripMod()
     {
-
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 
         GTripItems.init();
         GTripBlocks.init();
+
+        GTripLootModifiers.register(modEventBus);
+
+
 
         GregtripGTAddon.REGISTRATE.addDataGenerator(ProviderType.LANG, GTripLangHandler::init);
         GregtripGTAddon.REGISTRATE.registerRegistrate();
@@ -55,65 +55,49 @@ public class GregtripMod
         return new ResourceLocation(MODID,path);
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
+
+    private static ShaderInstance renderTypeLSDSolid;
+    private static ShaderInstance renderTypeLSDCutout;
+    private static ShaderInstance renderTypeLSDCutoutMipped;
+
+    private static ShaderInstance renderTypeLSDTranslucent;
+
+
+    public static ShaderInstance getRenderTypeLSDSolid()
     {
-        @Nullable
-        private static ShaderInstance renderTypeLSDSolid;
-        private static ShaderInstance renderTypeLSDCutout;
-        private static ShaderInstance renderTypeLSDCutoutMipped;
+        return Objects.requireNonNull(renderTypeLSDSolid, "Attempted to call getRenderTypeLSDSolid before shaders have finished loading.");
+    }
+    public static ShaderInstance getRenderTypeLSDCutout()
+    {
+        return Objects.requireNonNull(renderTypeLSDCutout, "Attempted to call getRenderTypeLSDCutout before shaders have finished loading.");
+    }
+    public static ShaderInstance getRenderTypeLSDCutoutMipped()
+    {
+        return Objects.requireNonNull(renderTypeLSDCutoutMipped, "Attempted to call getRenderTypeLSDCutout before shaders have finished loading.");
+    }
+    public static ShaderInstance getRenderTypeLSDTranslucent()
+    {
+        return Objects.requireNonNull(renderTypeLSDTranslucent, "Attempted to call getRenderTypeLSDTranslucent before shaders have finished loading.");
+    }
 
-        private static ShaderInstance renderTypeLSDTranslucent;
+    private static void registerShader(RegisterShadersEvent event, final String path, Consumer<ShaderInstance> shaderInstanceConsumer) throws IOException {
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), GregtripMod.id(path), DefaultVertexFormat.BLOCK),shaderInstanceConsumer);
+    }
 
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 
-        public static ShaderInstance getRenderTypeLSDSolid()
-        {
-            return Objects.requireNonNull(renderTypeLSDSolid, "Attempted to call getRenderTypeLSDSolid before shaders have finished loading.");
-        }
-        public static ShaderInstance getRenderTypeLSDCutout()
-        {
-            return Objects.requireNonNull(renderTypeLSDCutout, "Attempted to call getRenderTypeLSDCutout before shaders have finished loading.");
-        }
-        public static ShaderInstance getRenderTypeLSDCutoutMipped()
-        {
-            return Objects.requireNonNull(renderTypeLSDCutoutMipped, "Attempted to call getRenderTypeLSDCutout before shaders have finished loading.");
-        }
-        public static ShaderInstance getRenderTypeLSDTranslucent()
-        {
-            return Objects.requireNonNull(renderTypeLSDTranslucent, "Attempted to call getRenderTypeLSDTranslucent before shaders have finished loading.");
-        }
-
-
+    private static final class ClientModEvents {
         @SubscribeEvent
-        public static void registerShaders(RegisterShadersEvent event) throws IOException
-        {
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("gregtrip","rendertype_lsd_solid"), DefaultVertexFormat.BLOCK), (shaderInstance) -> renderTypeLSDSolid = shaderInstance);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("gregtrip","rendertype_lsd_cutout"), DefaultVertexFormat.BLOCK), (shaderInstance) -> renderTypeLSDCutout = shaderInstance);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("gregtrip","rendertype_lsd_cutout_mipped"), DefaultVertexFormat.BLOCK), (shaderInstance) -> renderTypeLSDCutoutMipped = shaderInstance);
-            event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation("gregtrip","rendertype_lsd_translucent"), DefaultVertexFormat.BLOCK), (shaderInstance) -> renderTypeLSDTranslucent = shaderInstance);
+        public static void register(RegisterShadersEvent event) throws IOException {
+
+            registerShader(event, "rendertype_lsd_solid", (shaderInstance) -> renderTypeLSDSolid = shaderInstance);
+            registerShader(event, "rendertype_lsd_cutout", (shaderInstance) -> renderTypeLSDCutout = shaderInstance);
+            registerShader(event, "rendertype_lsd_cutout_mipped", (shaderInstance) -> renderTypeLSDCutoutMipped = shaderInstance);
+            registerShader(event, "rendertype_lsd_translucent", (shaderInstance) -> renderTypeLSDTranslucent = shaderInstance);
+
         }
     }
 
-    public static final Map<RenderType, Supplier<ShaderInstance>> LSDShaderMap = new HashMap<>();
-    static {
-        LSDShaderMap.put(RenderType.solid(), ClientModEvents::getRenderTypeLSDSolid);
-        LSDShaderMap.put(RenderType.cutout(),ClientModEvents::getRenderTypeLSDCutout);
-        LSDShaderMap.put(RenderType.cutoutMipped(),ClientModEvents::getRenderTypeLSDCutoutMipped);
-        LSDShaderMap.put(RenderType.translucent(),ClientModEvents::getRenderTypeLSDTranslucent);
-    }
-
-    public static void setupLSDShader(RenderType pRenderType){
-        assert Minecraft.getInstance().player != null;
-        if(((Trippable) Minecraft.getInstance().player).gTrip$getIsTripActive() && GregtripMod.LSDShaderMap.containsKey(pRenderType)) {
-            RenderSystem.setShader(GregtripMod.LSDShaderMap.get(pRenderType));
-            ShaderInstance shader = RenderSystem.getShader();
-            assert shader != null;
-            shader.safeGetUniform("Time").set((float)Minecraft.getInstance().levelRenderer.getTicks());
-            //shader.safeGetUniform("WaveStrength").set(2f);
-            float playerSpeed = Math.max(Minecraft.getInstance().player.getDeltaMovement().toVector3f().length(),.6f);
-            shader.safeGetUniform("PlayerSpeedModifier").set((1-.191f/(playerSpeed+.001f)));
-        }
-    }
 
 
 }

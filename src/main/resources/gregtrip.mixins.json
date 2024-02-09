@@ -7,6 +7,8 @@
   "mixins": [
   ],
   "client": [
+    "sodium.MixinDefaultChunkRenderer",
+    "sodium.MixinShaderChunkRenderer",
     "MixinLevelRenderer",
     "MixinLocalPlayer"
   ],

@@ -1,7 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin;
 
 import com.mojang.authlib.GameProfile;
-import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixininterfaces.Trippable;
+import ml.jozefpeeterslaan72wuustwezel.gregtrip.mixinhelpers.Trippable;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;

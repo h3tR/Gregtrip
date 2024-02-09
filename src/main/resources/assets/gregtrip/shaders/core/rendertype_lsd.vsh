@@ -1,8 +1,8 @@
-#version 330
+#version 330 core
 
 #moj_import <light.glsl>
 #moj_import <fog.glsl>
-#moj_import <gregtrip:color.glsl>
+#moj_import <gregtrip:lsd_effects.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -32,19 +32,9 @@ void main() {
 
     vertexDistance = fog_distance(ModelViewMat, pos, FogShape);
 
-    float distanceModifier =  max(4,pow(vertexDistance, 1/2f))/PlayerSpeedModifier;
 
-    vec3 posOffset = vec3(0);
 
-    posOffset.x = sin(pos.z*pos.x*pos.y*.5+Time/distanceModifier);
-    posOffset.y = cos(pos.z*-pos.x*pos.y*.5+Time/distanceModifier);
-    posOffset.z = -cos(-pos.z*-pos.x*pos.y*.5+Time/distanceModifier);
-
-    posOffset /= 64/WaveStrength;
-    posOffset *= pow(vertexDistance, .25f);
-    posOffset *= PlayerSpeedModifier;
-
-    gl_Position = ProjMat * ModelViewMat * vec4(pos+posOffset, 1.0);
+    gl_Position = ProjMat * ModelViewMat * vec4(pos+getLSDVertexOffset(pos, vertexDistance, PlayerSpeedModifier, Time, WaveStrength), 1.0);
     /* vec4 vibrantColor = RGBAtoHSVA(Color);
      vibrantColor.y=.8f;*/
 

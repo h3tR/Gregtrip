@@ -22,11 +22,11 @@ public class GTripMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         switch (mixinClassName){
-          /*  case "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.sodium.MixinTerrainRenderPass" -> {
-               return MixinPluginShared.isClassFound("me.jellysquid.mods.sodium.client.render.chunk.terrain.TerrainRenderPass");
-            }*/
+            case "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.sodium.MixinShaderChunkRenderer", "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.sodium.MixinDefaultChunkRenderer" -> {
+                return MixinPluginShared.IS_SODIUM_LOAD;
+            }
             case "ml.jozefpeeterslaan72wuustwezel.gregtrip.mixin.MixinLevelRenderer" -> {
-                return !MixinPluginShared.isClassFound("me.jellysquid.mods.sodium.client.render.chunk.terrain.TerrainRenderPass");
+                return !MixinPluginShared.IS_SODIUM_LOAD;
             }
             default -> {
                 return true;
