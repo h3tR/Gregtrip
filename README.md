@@ -6,7 +6,6 @@
     <a href="https://www.curseforge.com/minecraft/mc-mods/gregtrip"><img src="https://cf.way2muchnoise.eu/968902.svg?badge_style=for_the_badge" alt="CurseForge"></a>
 </h1>
 
-# Gregtrip
 This addon for <a href="https://github.com/GregTechCEu/GregTech-Modern"></a> adds the famous psychedelic LSD as well as its chemical synthesis from various precursors loosely based on real life chemical processes.
 
 It also adds a bunch of extra chemicals to the game that are used in the synthesis.
